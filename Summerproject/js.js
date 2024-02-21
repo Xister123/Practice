@@ -1,7 +1,7 @@
 <script>  
 function validateDoctorForm(){  
-    var doc_username = document.getElementsByName("doc_username")[0].value;  
-    var password = document.getElementsByName("doc_password")[0].value;  
+    var doc_username = document.getElementsByName("doc_username").value;  
+    var password = document.getElementsByName("doc_password").value;  
 
     if (doc_username == "" || doc_username == null){  
         alert("Username can't be blank");  
@@ -13,8 +13,8 @@ function validateDoctorForm(){
 }  
 
 function validatePatientForm(){  
-    var pat_username = document.getElementsByName("pat_username")[0].value;  
-    var password = document.getElementsByName("pat_password")[0].value;  
+    var pat_username = document.getElementsByName("pat_username").value;  
+    var password = document.getElementsByName("pat_password").value;  
 
     if (pat_username == "" || pat_username == null){  
         alert("Username can't be blank");  
