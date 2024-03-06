@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function outerfuntion(){
+            let outerfuntion = console.log("1 st.......");
+            function innerfunction(){
+                console.log("",outerfuntion);
+            }
+            return{
+                innerfunction
+            };
+        }
+        let clousure=outerfuntion();
+        clousure.innerfunction();
+    </script>
+</body>
+</html>

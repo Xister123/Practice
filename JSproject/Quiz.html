@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz App</title>
+
+</head>
+<body>
+<div class="quiz-container">
+    <h1>JavaScript Quiz</h1>
+    <div class="question-container"></div>
+    <button id="submitBtn">Submit Answers</button>
+    <div class="result-container"></div>
+</div>
+<script>
+    const questions = [
+        {
+            question: "What is the capital of France?",
+            answers: ["Paris", "Berlin", "London", "Madrid"],
+            correctAnswer: "Paris"
+        },
+        {
+            question: "Which language is used for web development?",
+            answers: ["Java", "Python", "JavaScript", "C++"],
+            correctAnswer: "JavaScript"
+        },
+        {
+            question: "What does HTML stand for?",
+            answers: ["Hyper Text Markup Language", "Highly Typed Machine Learning", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+            correctAnswer: "Hyper Text Markup Language"
+        }
+    ];
+    const questionContainer = document.querySelector('.question-container');
+    const resultContainer = document.querySelector('.result-container');
+    const submitBtn = document.getElementById('submitBtn');
+    let score = 0;
+    function displayQuestions() {
+        questions.forEach((question, index) => {
+            const questionElement = document.createElement('div');
+            questionElement.innerHTML = `
+                <p>${index + 1}. ${question.question}</p>
+                <ul class="answers">
+                    ${question.answers.map(answer => `<li class="answer-item"><input type="radio" name="question${index}" value="${answer}">${answer}</li>`).join('')}
+                </ul>
+            `;
+            questionContainer.appendChild(questionElement);
+        });
+    }
+    function calculateScore() {
+        score = 0;
+        questions.forEach((question, index) => {
+            const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+            if (selectedAnswer) {
+                if (selectedAnswer.value === question.correctAnswer) {
+                    score++;
+                }
+            }
+        });
+    }
+    function showResult() {
+        resultContainer.innerHTML = `<p>Your score is: ${score}/${questions.length}</p>`;
+    }
+    submitBtn.addEventListener('click', () => {
+        calculateScore();
+        showResult();
+    });
+    displayQuestions();
+</script>
+</body>
+</html>
