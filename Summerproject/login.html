@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body >
+    <div class="container">
+        <h2>Patient Login</h2>
+        <form id="loginForm" action="Login.php" method="post" onsubmit="return validateForm()">
+            <label for="pat_username">Username:</label>
+            <input type="text" id="pat_username" name="pat_username" required>
+
+            <label for="pat_password">Password:</label>
+            <input type="password" id="pat_password" name="pat_password" required>
+
+            <input type="submit" value="Login">
+        </form>
+        <p>Don't have an account? <a href="Registration.html">click here</a></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('pat_username').value;
+            const password = document.getElementById('pat_password').value;
+
+            if (username.trim() === '') {
+                alert('Username is required');
+                return false;
+            }
+
+            if (password.trim() === '') {
+                alert('Password is required');
+                return false;
+            }
+
+            // Additional validation can be added here
+
+            return true;
+        }
+    </script>
+</body>
+</html>

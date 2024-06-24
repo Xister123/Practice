@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS Registration (
     registration_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
+    age int NOT NULL,
     gender ENUM('male', 'female', 'other') NOT NULL,
+    address varchar(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
@@ -19,13 +21,15 @@ CREATE TABLE IF NOT EXISTS appointments (
     age INT NOT NULL,
     doctor VARCHAR(100) NOT NULL,
     schedule_date DATE NOT NULL,
-    schedule_time TIME NOT NULL
+    schedule_time TIME NOT NULL,
+    approved Boolean Null,
 );
 
 CREATE TABLE IF NOT EXISTS doctors (
     doctor_id INT AUTO_INCREMENT PRIMARY KEY,
     doctor_firstname VARCHAR(100) NOT NULL,
     doctor_lastname VARCHAR(100) NOT NULL,
+    doctor_specialist varchar(100) NOT NULL,
     doctor_email VARCHAR(100) NOT NULL UNIQUE,
     doctor_password VARCHAR(255) NOT NULL
 );

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Schedule</title>
+    <link rel="stylesheet" type="text/css" href="Checkqueue.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Schedule</h1>
+        <table id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Age</th>
+                    <th>Doctor</th>
+                    <th>Schedule Date</th>
+                    <th>Schedule Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('Checkqueue.php');
+                const data = await response.json();
+                const tableBody = document.querySelector('#scheduleTable tbody');
+                tableBody.innerHTML = '';
+
+                if (data.length === 0) {
+                    const row = document.createElement('tr');
+                    const cell = document.createElement('td');
+                    cell.colSpan = 6;
+                    cell.textContent = 'No records found';
+                    row.appendChild(cell);
+                    tableBody.appendChild(row);
+                    return;
+                }
+
+                data.forEach(item => {
+                    const status = item.Approved === null ? 'Pending' : item.Approved ? 'Approved' : 'Cancelled';
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.patient_name}</td>
+                        <td>${item.age}</td>
+                        <td>${item.doctor}</td>
+                        <td>${item.schedule_date}</td>
+                        <td>${item.schedule_time}</td>
+                        <td>${status}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchData);
+    </script>
+</body>
+</html>

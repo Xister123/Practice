@@ -1,56 +1,75 @@
+/* Appointment.css */
+
+/* General styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  line-height: 1.6;
+  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
-form {
+.container {
+  max-width: 600px;
+  margin: 20px auto;
   background-color: #fff;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 500px;
 }
 
 h2 {
   text-align: center;
-  color: #333;
   margin-bottom: 20px;
 }
 
+form {
+  display: grid;
+  gap: 10px;
+}
+
 label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
+  font-weight: bold;
 }
 
 input[type="text"],
 input[type="number"],
-input[type="date"],
-select {
+select,
+input[type="date"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
+  border-radius: 4px;
+}
+
+input[type="submit"],
+input[type="button"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: #45a049;
+}
+
+/* Time slots */
+#timeSlots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 5px;
 }
 
 .time-slot {
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .time-slot.selected {
@@ -58,18 +77,6 @@ select {
   color: white;
 }
 
-input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-}
-
-input[type="submit"]:hover {
+.time-slot.selected:hover {
   background-color: #45a049;
 }

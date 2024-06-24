@@ -4,53 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Jai Shree Pashupati Clinic</title>
-    <link rel="stylesheet" type="css/text" href="Navbar.css">
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    
-    h1 {
-        text-align: center;
-        color: #007bff;
-    }
-    
-    p {
-        font-size: 18px;
-        line-height: 1.6;
-        color: #333;
-        text-align: justify;
-        margin-bottom: 20px;
-    }
-    
-    button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="Aboutus.css">
+    <link rel="stylesheet" type="text/css" href="navbar.css">
 </head>
-<body>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="Aboutus.html">About Us</a>
-        <a href="Services.html">Services</a>
-        <a href="Doctor.html">Doctor Info</a>
-    </nav>
+<body onload="loadNavbar()"></body>
+    <script>
+        function loadNavbar() {
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                });
+        }
+    </script>
+    <div id="navbar-container"></div>
     <div class="container">
         <h1>About Jai Shree Pashupati Clinic</h1>
         <p>
@@ -80,7 +47,6 @@
         <p>
             At Jai Shree Pashupati Clinic, we believe that true health is more than the absence of illness – it is a harmonious balance of body, mind, and soul. Join us on a journey to optimal well-being and discover the transformative power of prestige care.
         </p>
-        <button onclick="location.href='Doctorappointment.html'">Back to Login Page</button>
     </div>
 </body>
 </html>

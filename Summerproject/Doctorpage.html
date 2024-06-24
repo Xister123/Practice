@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Schedule</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patient Schedule</h1>
+    <table id="scheduleTable">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Age</th>
+                <th>Doctor</th>
+                <th>Schedule Date</th>
+                <th>Schedule Time</th>
+                <th>Status</th>
+                <th>Approve</th>
+                <th>Cancel</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+
+    <script>
+        function fetchData() {
+            fetch('Doctorpage.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#scheduleTable tbody');
+                    tableBody.innerHTML = '';
+
+                    if (data.length === 0) {
+                        const row = document.createElement('tr');
+                        const cell = document.createElement('td');
+                        cell.colSpan = 9;
+                        cell.textContent = 'No records found';
+                        row.appendChild(cell);
+                        tableBody.appendChild(row);
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const status = item.Approved === null ? 'Pending' : item.Approved ? 'Approved' : 'Cancelled';
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.patient_name}</td>
+                            <td>${item.age}</td>
+                            <td>${item.doctor}</td>
+                            <td>${item.schedule_date}</td>
+                            <td>${item.schedule_time}</td>
+                            <td id="status${item.id}">${status}</td>
+                            <td>
+                                <input type="checkbox" id="approve${item.id}" name="status${item.id}" value="approved" onclick="toggleUpdateButton(${item.id})"> Approve
+                            </td>
+                            <td>
+                                <input type="checkbox" id="cancel${item.id}" name="status${item.id}" value="cancelled" onclick="toggleUpdateButton(${item.id})"> Cancel
+                            </td>
+                            <td>
+                                <button type="button" id="updateButton${item.id}" disabled onclick="updateStatus(${item.id})">Update</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        }
+
+        function toggleUpdateButton(id) {
+            const approveCheckbox = document.querySelector(`#approve${id}`);
+            const cancelCheckbox = document.querySelector(`#cancel${id}`);
+            const updateButton = document.querySelector(`#updateButton${id}`);
+            
+            approveCheckbox.addEventListener('change', () => {
+                if (approveCheckbox.checked) {
+                    cancelCheckbox.checked = false;
+                }
+                updateButton.disabled = !(approveCheckbox.checked || cancelCheckbox.checked);
+            });
+
+            cancelCheckbox.addEventListener('change', () => {
+                if (cancelCheckbox.checked) {
+                    approveCheckbox.checked = false;
+                }
+                updateButton.disabled = !(approveCheckbox.checked || cancelCheckbox.checked);
+            });
+
+            updateButton.disabled = !(approveCheckbox.checked || cancelCheckbox.checked);
+        }
+
+        function updateStatus(id) {
+            const approveCheckbox = document.querySelector(`#approve${id}`);
+            const cancelCheckbox = document.querySelector(`#cancel${id}`);
+            const status = approveCheckbox.checked ? true : cancelCheckbox.checked ? false : null;
+            
+            fetch('updateStatus.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: id, Approved: status }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const statusCell = document.querySelector(`#status${id}`);
+                    statusCell.textContent = status ? 'Approved' : 'Cancelled';
+                } else {
+                    alert('Error updating status');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating status');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchData);
+    </script>
+</body>
+</html>

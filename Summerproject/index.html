@@ -5,63 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSP Clinic</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-            background-image: url('indeximage.jpg'); 
-            background-size: cover;  /* Ensures the background image covers the entire area */
-            background-position: center;  /* Centers the background image */
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.9);  /* Adds slight transparency */
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            animation: transitionIn-Y-bottom 0.5s;
-        }
-        .heading-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        .sub-text2 {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .login-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            padding: 10px 25px;
-            font-size: 16px;
-            text-decoration: none;  /* Ensures no underline */
-            display: inline-block;  /* Ensures the button gets the padding */
-        }
-        .login-btn:hover {
-            background-color: #0056b3;
-        }
-        @keyframes transitionIn-Y-bottom {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
     <div class="container">
@@ -71,7 +15,9 @@
             Don't worry. Find your doctor online and book as you wish with eDoc. <br>
             We offer you a free doctor channeling service. Make your appointment now.
         </p>
-        <a href="Summerproject/Doctorappointment.html" class="login-btn">Make Appointment</a>
+        <a href="./Doctorappointment.html">
+        <input type="button" value="Make Appointment" class="login-btn btn-primary btn" style="padding-left: 25px;padding-right: 25px;padding-top: 10px;padding-bottom: 10px;">
+        </a>
     </div>
 </body>
 </html>
